@@ -28,15 +28,27 @@ def _command(inp, state):
 			if(len(tkns) >= 2):
 				_query(tkns[1])
 			else:
-				print("No paperID given for 'sim paperID'")
+				print("No paper ID given for command 'sim ID'")
 			pass
+		elif tkn == "inf":
+			if(len(tkns) >= 3):
+				processor._influential(tkns[1],tkns[2])
+			else:
+				print("No paper ID given for command 'inf ID include_citation_flag'")
 		else:
 			print("Command is not supported.")
 
+# Cecks if the user givin query is a valid id for any paper in the collection
+def _valid_id(paper_id):
+	return True
+
 def _query(paper_id):
-	_prompt_proc()
-	results = None
-	# results.print
+	if _valid_id(paper_id):
+		_prompt_proc()
+		results = None
+		# results.print
+	else:
+		print("Invalid paper ID")
 
 def _listen():
 	global ext
