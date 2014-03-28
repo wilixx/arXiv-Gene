@@ -1,4 +1,4 @@
-ArXiV_Gen
+ArXiV_Gene
 =========
 
 Describes the relations between academic papers on ArXiv.com as written in this paper http://www.benyah.net/publications/InformationGenealogy_KDD07.pdf.
