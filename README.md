@@ -17,3 +17,8 @@ Version 0.1 - Complete
 Version 0.2 - WIP
   The convex optimization outlined in the paper is to be solve using the separable optimization python API for Mosek.
   
+
+# Components
+- [ ] fast knn from scikit-learn
+- [ ] convex optimization function ontop of mosek
+- [ ] Relational graph construction
