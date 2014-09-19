@@ -1,5 +1,6 @@
-#Author: Hamzeh Alsalhi December 2013
-# Collects all necessary operations with significance on the data of a single document in the corpus
+# Author: Hamzeh Alsalhi December 2013
+# Collects all necessary operations with significance on the data of a single 
+# document in the corpus
 import re
 from datetime import datetime, date, time
 import numpy as np
@@ -27,10 +28,12 @@ class document:
 	# The raw data that represents this document
 	raw = None
 
-	# The raw data stripped down to only english words, no special syntax included
+	# The raw data stripped down to only english words, no special
+	# syntax included
 	english = None
 
-	# Numpy array of the raw data stripped down to only english words, no special syntax included
+	# Numpy array of the raw data stripped down to only english words, no 
+	# special syntax included
 	np_english = None
 
 	# Set of all english words in this documents
@@ -38,7 +41,8 @@ class document:
 
 	def get_english(self,raw):
 		# return the english word list representation of raw
-		return [w for w in raw.split() if re.match('^[a-zA-Z0-9\']+$',w) is not None]
+		return [w for w in raw.split() if re.match('^[a-zA-Z0-9\']+$',w) 
+				is not None]
 
 	def parse_ID(self,s):
 		# Parses the line that contains the ID for a clean ID
@@ -62,7 +66,8 @@ class document:
 			self.published = self.parse_date(self.ID.split("/")[-1][:4])
 		else:
 			self.ID = "NA"
-			self.log_file.write("ID not found for paper " + self.file_name + "\n")
+			self.log_file.write("ID not found for paper " + self.file_name + 
+								"\n")
 
 	def __init__(self,corp,raw_data,file_name):
 		from interface import log_file_path
@@ -86,13 +91,15 @@ class document:
 		self.log_file.close()
 
 
-	# The term frequency vector for this paper in realtion to its corpus as np array
+	# The term frequency vector for this paper in realtion to its corpus as np
+	# array
 	TF = None
 
 	# The TFIDF vector for this paper in realtion to its corpus as np array
 	TFIDF = None
 
-	# The estimator as defined in shaparenko 07 to be TF/len(english) for this document as np array
+	# The estimator as defined in shaparenko 07 to be TF/len(english) for this
+	# document as np array
 	estimator = None
 
 	# List of documents in the corpus that this document cites
@@ -108,23 +115,25 @@ class document:
 	influenced = None
 
 	def construct_TF_vector(self, corpus_word_list, np_eng):
-		# Constructs a vector of length len(corpus_word_list) that counts how many times each 
-		# word in english occurs
+		# Constructs a vector of length len(corpus_word_list) that counts 
+		# how many times each word in english occurs
 		tf = np.array([0] * len(corpus_word_list))
 		for i in range(len(corpus_word_list)):
 			tf[i] = len(np.where(np_eng == corpus_word_list[i])[0])
 		return tf
 
 	def construct_estimator(self, corpus_word_list, np_eng):
-		# Constructs a vector of length len(corpus_word_list) that counts how many times each 
-		# word in english occurs and divides each element by len(np_eng)
+		# Constructs a vector of length len(corpus_word_list) that counts how
+		# many times each word in english occurs and divides each element by
+		# len(np_eng)
 		tf = np.array([0] * len(corpus_word_list))
 		for i in range(len(corpus_word_list)):
 			tf[i] = len(np.where(np_eng == corpus_word_list[i])[0])
 		return tf/float(len(np_eng))
 
 	def construct_relational_fields(self):
-		# Build the fields of a document that depend on having a completly defined corpus
-		# such as TF, TFIDF, cited_by, and more
+		# Build the fields of a document that depend on having a completly 
+		# defined corpus such as TF, TFIDF, cited_by, and more
 		self.TF = self.construct_TF_vector(self.corpus.words,self.np_english)
-		self.estimator = self.construct_estimator(self.corpus.words,self.np_english)
+		self.estimator = self.construct_estimator(self.corpus.words,
+												  self.np_english)
