@@ -10,15 +10,8 @@ The goal of this project is first to develop the necessary infrastructure to rec
 
 The entry point for running the code is interface.py
 
-
-Version 0.1 - Complete
-  Basic loading of the ArXiV data set as a corpus with implemented loading of document metadata and initial computation of document feature vectors and language models.
-  
-Version 0.2 - WIP
-  The convex optimization outlined in the paper is to be solve using the separable optimization python API for Mosek.
-  
-
 # Components
+- [x] Load local arXiv corpus and calculate tf vectors
 - [ ] fast knn from scikit-learn
 - [ ] convex optimization function ontop of mosek
 - [ ] Relational graph construction
